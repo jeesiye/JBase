@@ -1,38 +1,58 @@
 package ocn.siye.JBase;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.net.CacheRequest;
+import java.net.CacheResponse;
+import java.net.HttpURLConnection;
+import java.net.JarURLConnection;
+import java.net.ResponseCache;
+import java.net.SecureCacheResponse;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.net.URLPermission;
+import java.net.URLStreamHandler;
+import java.net.URLStreamHandlerFactory;
+import java.util.Set;
+import java.util.TreeSet;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+@SuppressWarnings("all")
+public class AppTest {
+
+    public static void main(String[] args) {
+	
+	ownfuns(ResponseCache.class);
+	
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    public static void ownfuns(Class<?> cl) {
+	Set<String> sets = new TreeSet<>();
+	Method[] methods = cl.getMethods();
+	for (Method method : methods) {
+	    if (method.getDeclaringClass().toString().equals(cl.toString())) {
+		sets.add(method.getName() + " <p" + method.getParameterCount() + "> : "
+			+ method.getReturnType().getSimpleName());
+	    }
+	}
+	sets.forEach(System.out::println);
+
+	System.out.println();
+	System.out.println(sets.size());
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    public static void ownfields(Class<?> cl) {
+	Set<String> set = new TreeSet<>();
+	Field[] fields = cl.getFields();
+	for (Field field : fields) {
+	    if (field.getDeclaringClass().toString().equals(cl.toString())) {
+		set.add(field.getName());
+	    }
+	}
+	set.forEach(System.out::println);
     }
+
 }
