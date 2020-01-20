@@ -47,6 +47,9 @@ import java.time.zone.ZoneOffsetTransition;
 import java.time.zone.ZoneOffsetTransitionRule;
 import java.time.zone.ZoneRules;
 import java.time.zone.ZoneRulesProvider;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.time.zone.ZoneOffsetTransitionRule.TimeDefinition;
 
 import javax.swing.text.Highlighter;
@@ -61,9 +64,8 @@ public class App {
 //		boolean bool = Class2Txt.toTxt(path, NClob.class);
 //		System.out.println(bool);
 
-		String prefixStore = "/media/coder/43859743-b167-4f2a-a4eb-0897b0ccb159/svlution/RefreshMemory/J$2basic/$2sql/java.sql";
-		String prefixPack = "java/sql";
-		Packclass2Txt.pack2txt(prefixPack, Paths.get(prefixStore));
+		String prefixStore = "/media/coder/43859743-b167-4f2a-a4eb-0897b0ccb159/svlution/RefreshMemory/J$2basic/$1time/java.util";
+		Class2Txt.toTxt(Paths.get(prefixStore), GregorianCalendar.class);
 
 	}
 
