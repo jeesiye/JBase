@@ -56,10 +56,14 @@ public class App {
 
 	public static void main(String[] args) {
 
-		String str = "/home/coder/RefreshMemory/J$2basic/$2sql/java.sql";
-		Path path = Paths.get(str);
-		boolean bool = Class2Txt.toTxt(path, NClob.class);
-		System.out.println(bool);
+//		String str = "/home/coder/RefreshMemory/J$2basic/$2sql/java.sql";
+//		Path path = Paths.get(str);
+//		boolean bool = Class2Txt.toTxt(path, NClob.class);
+//		System.out.println(bool);
+
+		String prefixStore = "/media/coder/43859743-b167-4f2a-a4eb-0897b0ccb159/svlution/RefreshMemory/J$2basic/$2sql/java.sql";
+		String prefixPack = "java/sql";
+		Packclass2Txt.pack2txt(prefixPack, Paths.get(prefixStore));
 
 	}
 

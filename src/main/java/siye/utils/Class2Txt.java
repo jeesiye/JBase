@@ -31,6 +31,7 @@ public final class Class2Txt {
 			byteBuffer.put(bytes);
 			byteBuffer.clear();
 			fileChannel.write(byteBuffer);
+			System.out.println(newpath.toString());
 			return true;
 
 		} catch (Exception ex) {
