@@ -5,10 +5,13 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.Set;
+import java.util.TreeSet;
 
 public final class Class2Txt {
 
@@ -24,8 +27,7 @@ public final class Class2Txt {
 		FileChannel fileChannel = null;
 		try {
 			Path abs = newpath.toAbsolutePath();
-			fileChannel = FileChannel.open(abs, StandardOpenOption.WRITE,
-					StandardOpenOption.CREATE);
+			fileChannel = FileChannel.open(abs, StandardOpenOption.WRITE, StandardOpenOption.CREATE);
 			byte[] bytes = handlerCls(cl).toString().getBytes();
 			ByteBuffer byteBuffer = ByteBuffer.allocate(bytes.length);
 			byteBuffer.put(bytes);
@@ -51,8 +53,7 @@ public final class Class2Txt {
 
 	public static StringBuilder handlerCls(Class<?> cl) {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(handlerCons(cl)).append("\n\n")
-				.append(handlerFields(cl)).append("\n\n")
+		stringBuilder.append(handlerCons(cl)).append("\n\n").append(handlerFields(cl)).append("\n\n")
 				.append(handlerFunc(cl)).append("\n\n");
 
 		return stringBuilder;
@@ -107,13 +108,31 @@ public final class Class2Txt {
 			stringBuilder.append(append45());
 			return stringBuilder;
 		}
+
+		// sort of functions's names
+		Set<String> sets = new TreeSet<>();
 		for (Method method : methods) {
-			String content = method.getName() + " <p"
-					+ method.getParameterCount() + "> :"
-					+ method.getReturnType().getSimpleName();
-			StringBuilder append32 = append32(content);
-			stringBuilder.append(append32);
+			if (!method.isSynthetic() && Modifier.isPublic(method.getModifiers())) { // user's write code
+				StringBuilder methodBuilder = new StringBuilder();// store method's full names;
+				methodBuilder.append(method.getName());
+				methodBuilder.append(" <");
+				// handler param type
+				Parameter[] parameters = method.getParameters();
+				for (int index = 0; index < parameters.length; index++) {
+					methodBuilder.append(parameters[index].getType().getSimpleName());
+					if (index < parameters.length - 1) {
+						methodBuilder.append(",");
+					}
+				}
+				//
+				methodBuilder.append("> : ");
+				methodBuilder.append(method.getReturnType().getSimpleName());
+				StringBuilder append32 = append32(methodBuilder.toString());
+				sets.add(append32.toString());
+//				stringBuilder.append(append32);
+			}
 		}
+		sets.forEach(funcname -> stringBuilder.append(funcname));
 		stringBuilder.append(append45());
 		return stringBuilder;
 	}
@@ -121,18 +140,22 @@ public final class Class2Txt {
 	private static String fileName(Class<?> cl) {
 		int modifiers = cl.getModifiers();
 		if (cl.isEnum()) {
-			return cl.getSimpleName() + "[E].txt";
+//			return cl.getSimpleName() + "[E].txt";
+			return "[E]" + cl.getSimpleName() + ".txt";
 		}
 		if (Modifier.isFinal(modifiers)) {
-			return cl.getSimpleName() + "[FL].txt";
+			return "[FL]" + cl.getSimpleName() + ".txt";
 		}
 		if (Modifier.isInterface(modifiers)) {
-			return cl.getSimpleName() + "[I].txt";
+//			return cl.getSimpleName() + "[I].txt";
+			return "[I]" + cl.getSimpleName() + ".txt";
 		}
 		if (Modifier.isAbstract(modifiers)) {
-			return cl.getSimpleName() + "[A].txt";
+			return "[A]" + cl.getSimpleName() + ".txt";
+//			return cl.getSimpleName() + "[A].txt";
 		}
-		return cl.getSimpleName() + "[L].txt";
+		return "[L]" + cl.getSimpleName() + ".txt";
+//		return cl.getSimpleName() + "[L].txt";
 	}
 
 	private static StringBuilder modifier(Class<?> cl) {
@@ -142,8 +165,7 @@ public final class Class2Txt {
 			return stringBuilder.append("E:").append(cl.getName()).append("\n");
 		}
 		if (Modifier.isFinal(modifiers)) {
-			return stringBuilder.append("FL:").append(cl.getName())
-					.append("\n");
+			return stringBuilder.append("FL:").append(cl.getName()).append("\n");
 		}
 		if (Modifier.isInterface(modifiers)) {
 			return stringBuilder.append("I:").append(cl.getName()).append("\n");
@@ -155,6 +177,10 @@ public final class Class2Txt {
 	}
 
 	private static StringBuilder append32(String content) {
+		if (content.length() >= 68) {
+			System.out.println("handler method's full name faild , cause length");
+			return new StringBuilder(content).append("\n");
+		}
 		int num32 = 68 - content.length() - 1;
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(content);

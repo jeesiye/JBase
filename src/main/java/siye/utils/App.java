@@ -39,6 +39,7 @@ import java.time.format.FormatStyle;
 import java.time.format.ResolverStyle;
 import java.time.format.SignStyle;
 import java.time.format.TextStyle;
+import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.TemporalQueries;
 import java.time.temporal.TemporalQuery;
@@ -56,16 +57,35 @@ import javax.swing.text.Highlighter;
 
 @SuppressWarnings("all")
 public class App {
+	
+	
+	
+	
 
 	public static void main(String[] args) {
 
-//		String str = "/home/coder/RefreshMemory/J$2basic/$2sql/java.sql";
-//		Path path = Paths.get(str);
-//		boolean bool = Class2Txt.toTxt(path, NClob.class);
-//		System.out.println(bool);
+		/*
+		 * handler package's classes
+		 */
+		String prefixStore = "/home/coder/RefreshMemory/J$2basic/$2sql/java.sql";
+		String prefixPack = "java/sql";
+		Packclass2Txt.pack2txt(prefixPack, Paths.get(prefixStore));
 
-		String prefixStore = "/media/coder/43859743-b167-4f2a-a4eb-0897b0ccb159/svlution/RefreshMemory/J$2basic/$1time/java.util";
-		Class2Txt.toTxt(Paths.get(prefixStore), GregorianCalendar.class);
+		/*
+		 * handler once classes
+		 */
+
+//
+//		String prefixStore = "/media/coder/43859743-b167-4f2a-a4eb-0897b0ccb159/svlution/RefreshMemory/J$2basic/$1time/java.util";
+//		Class2Txt.toTxt(Paths.get(prefixStore), GregorianCalendar.class);
+
+		/*
+		 * test unit
+		 */
+
+//		StringBuilder stringBuilder = Class2Txt.handlerCls(TimeDefinition.class);
+//		System.out.println(stringBuilder.toString());
+		
 
 	}
 
