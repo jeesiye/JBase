@@ -22,15 +22,19 @@ public class ReadSrcJars {
 //		list.forEach(var -> print(var));
 //	}
 
+//	public static void main(String[] args) {
+//		List<String> list = run();
+//		list.forEach(var -> {
+//			if (var.contains("java/time")) {
+//				String regex = "^java/time" + "/[a-zA-Z]*.java$";
+//				if (Pattern.matches(regex, var))
+//					System.out.println(var);
+//			}
+//		});
+//	}
+	
 	public static void main(String[] args) {
-		List<String> list = run();
-		list.forEach(var -> {
-			if (var.contains("java/time")) {
-				String regex = "^java/time" + "/[a-zA-Z]*.java$";
-				if (Pattern.matches(regex, var))
-					System.out.println(var);
-			}
-		});
+		System.out.println(way);
 	}
 
 	private static List<String> run() {

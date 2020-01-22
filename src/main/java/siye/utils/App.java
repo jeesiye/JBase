@@ -67,8 +67,8 @@ public class App {
 		/*
 		 * handler package's classes
 		 */
-		String prefixStore = "/home/coder/RefreshMemory/J$2basic/$2sql/java.sql";
-		String prefixPack = "java/sql";
+		String prefixStore = "/media/coder/43859743-b167-4f2a-a4eb-0897b0ccb159/svlution/RefreshMemory/J$2basic/$3container/java.util";
+		String prefixPack = "java/util";
 		Packclass2Txt.pack2txt(prefixPack, Paths.get(prefixStore));
 
 		/*
