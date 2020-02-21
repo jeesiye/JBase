@@ -2,7 +2,6 @@ package tjava.time;
 
 import java.time.Instant;
 
-import org.junit.Test;
 
 public class Tinstant {
 
@@ -14,13 +13,13 @@ public class Tinstant {
 		
 	}
 
-	@Test
+//	@Test
 	public void now() {
 		Instant instant = Instant.now();
 		System.out.println(instant);
 	}
 
-	@Test
+//	@Test
 	public void run() {
 	}
 

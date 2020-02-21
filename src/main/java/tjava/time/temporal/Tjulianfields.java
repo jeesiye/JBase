@@ -1,11 +1,6 @@
 package tjava.time.temporal;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
-import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.temporal.JulianFields;
 import java.util.Calendar;
 

@@ -6,36 +6,32 @@ import java.time.temporal.Temporal;
 import java.time.temporal.TemporalUnit;
 import java.util.logging.Logger;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 public class ITtemporal {
 
 	private final static Logger log = Logger.getLogger(ITtemporal.class.getName());
 	private Temporal temporal;
 
-	@Test
+//	@Test
 	public void isSupported() {
 		TemporalUnit temporalUnit = ChronoUnit.ERAS;
 		Boolean bool = temporal.isSupported(temporalUnit);
 		log.info(bool.toString());
 	}
 	
-	@Test
+//	@Test
 	public void run() {
 		
 	}
 	
 
-	@Before
+//	@Before
 	public void prepare() {
 		if (temporal == null) {
 			temporal = Instant.now();
 		}
 	}
 
-	@After
+//	@After
 	public void destroy() {
 		if (temporal != null) {
 			temporal = null;
