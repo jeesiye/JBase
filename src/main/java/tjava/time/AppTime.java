@@ -30,6 +30,8 @@ public class AppTime {
 //		System.out.println(utc);
 //		System.out.println(utc.instant());
 
+		// 中文字体测试
+
 		System.out.println(Year.now());
 
 	}
